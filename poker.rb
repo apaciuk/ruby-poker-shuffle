@@ -58,6 +58,8 @@ class Poker
             user_input = gets.chomp
             if user_input == "stand"
                 @game_over = true
+                puts "Game over, your final hand was:" 
+                @player_hand.show_hand
             elsif user_input == "draw"
                 draw
             else 
@@ -75,10 +77,8 @@ class Poker
             @player_hand.show_hand_for_draw
             discard = gets.chomp.to_i
             cards_to_discard.push(discard)
+            count += 1
             @player_hand.finish_draw(cards_to_discard, @deck)
-
-
-    
         end
     end 
 end 
