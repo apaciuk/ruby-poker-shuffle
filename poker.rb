@@ -1,3 +1,5 @@
+require 'colorize'
+
 class Card 
     attr_accessor :face, :suit  
     def initialize(face, suit) 
@@ -17,22 +19,23 @@ class Hand
         @cards.delete_at(card)
         end
     deck.shuffle!
-    puts "Old cards: #{@cards}"
+    puts "Old cards: #{@cards}".blue
     new_cards = deck.take(cards_to_discard.count)
-    puts "New cards: #{new_cards}"
+    puts "New cards: #{new_cards}".green
     @cards = @cards + new_cards
     end
 
     def show_hand 
+    puts "Your hand is:"
     @cards.each do |card|
-        puts "#{card.face}#{card.suit}"
+        puts "#{card.face}#{card.suit}".green
         end
     end 
         
     def show_hand_for_draw
     puts "Enter the number below to give up that card"
     @cards.each do |card|
-        puts "#{card.face}#{card.suit}"
+        puts "#{card.face}#{card.suit}".yellow
         end
     end
 end 
@@ -58,7 +61,7 @@ class Poker
             user_input = gets.chomp
             if user_input == "stand"
                 @game_over = true
-                puts "Game over, your final hand was:" 
+                puts "Game over!" 
                 @player_hand.show_hand
             elsif user_input == "draw"
                 draw
@@ -79,6 +82,7 @@ class Poker
             cards_to_discard.push(discard)
             count += 1
             @player_hand.finish_draw(cards_to_discard, @deck)
+            @player_hand.show_hand
         end
     end 
 end 
