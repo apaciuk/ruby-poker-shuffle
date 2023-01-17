@@ -1,5 +1,5 @@
 class Card 
-    attr_accessor :face, :suit
+    attr_accessor :face, :suit  
     def initialize(face, suit) 
         @face = face
         @suit = suit
@@ -17,22 +17,22 @@ class Hand
         @cards.delete_at(card)
         end
     deck.shuffle!
-    puts "old cards: #{@cards}"
+    puts "Old cards: #{@cards}"
     new_cards = deck.take(cards_to_discard.count)
-    puts "new cards: #{new_cards}"
+    puts "New cards: #{new_cards}"
     @cards = @cards + new_cards
     end
 
     def show_hand 
     @cards.each do |card|
-        puts "#{card.face} of #{card.suit}"
+        puts "#{card.face}#{card.suit}"
         end
     end 
         
     def show_hand_for_draw
     puts "Enter the number below to give up that card"
     @cards.each do |card|
-        puts "#{card.face} of #{card.suit}"
+        puts "#{card.face}#{card.suit}"
         end
     end
 end 
@@ -44,7 +44,7 @@ class Poker
         @game_over = false
         @deck = []
         ['2','3','4','5','6','7','8','9','10','J','Q','K','A'].each do |face|
-        ['clubs', 'diamonds', 'hearts', 'spades'].each do |suit|
+        ['C', 'D', 'H', 'S'].each do |suit|
         @deck.push(Card.new(face, suit))
             end 
         end
@@ -69,12 +69,15 @@ class Poker
     def draw 
         puts "How many cards would you like to give up?"
         number_of_new_cards = gets.chomp.to_i
-        cards_to_give_up = []
+        cards_to_discard = []
         count = 0
         while count < number_of_new_cards 
             @player_hand.show_hand_for_draw
-            discard_card = gets.chomp.to_i
-            @cards_to_give_up.push(card)
+            discard = gets.chomp.to_i
+            cards_to_discard.push(discard)
+            @player_hand.finish_draw(cards_to_discard, @deck)
+
+
     
         end
     end 
