@@ -2,12 +2,12 @@ require 'colorize'
 require_relative 'card.rb'
 require_relative 'hand.rb'  
 
-class Poker 
+class Play
     def initialize
         @game_over = false
         @deck = []
-        ['2','3','4','5','6','7','8','9','10','J','Q','K','A'].each do |face|
-        ['C', 'D', 'H', 'S'].each do |suit|
+        %w[2 3 4 5 6 7 8 9 10 J Q K A].each do |face|
+        %w[C D H S].each do |suit|
         @deck.push(Card.new(face, suit))
             end 
         end
@@ -15,16 +15,16 @@ class Poker
         @player_hand = Hand.new(@deck.take(5))
         @player_hand.show_hand
 
-        while !@game_over
+        until @game_over
             puts "What would you like to do? (stand or draw?)"
             status = gets.chomp
             if status == "stand"
                 @game_over = true
-                puts "Game over!" 
+                puts "Game over!"
                 @player_hand.show_hand
             elsif status == "draw"
                 draw
-            else 
+            else
                 puts "Invalid input"
             end
         end
@@ -46,4 +46,4 @@ class Poker
     end 
 end 
 
-Poker.new
+Play.new

@@ -8,23 +8,23 @@ class Hand
         @cards.delete_at(card)
         end
     deck.shuffle!
-    puts "Old cards: #{@cards}".blue
+    puts "Old cards: #{@cards}"
     new_cards = deck.take(cards_to_discard.count)
-    puts "New cards: #{new_cards}".green
+    puts "New cards: #{new_cards}"
     @cards = @cards + new_cards
     end
 
     def show_hand 
     puts "Your hand is:"
     @cards.each do |card|
-        puts "#{card.face}#{card.suit}".green
+        puts "#{card.face}#{card.suit}"
         end
     end 
         
     def show_hand_for_draw
     puts "Enter the number below to give up that card"
     @cards.each do |card|
-        puts "#{card.face}#{card.suit}".yellow
+        puts "#{card.face}#{card.suit}"
         end
     end
 end 
