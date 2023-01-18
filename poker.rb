@@ -53,17 +53,16 @@ class Poker
         end
         @deck = @deck.shuffle!
         @player_hand = Hand.new(@deck.take(5))
-        @dealer_hand = Hand.new(@deck.take(5))
         @player_hand.show_hand
 
         while !@game_over
             puts "What would you like to do? (stand or draw?)"
-            user_input = gets.chomp
-            if user_input == "stand"
+            status = gets.chomp
+            if status == "stand"
                 @game_over = true
                 puts "Game over!" 
                 @player_hand.show_hand
-            elsif user_input == "draw"
+            elsif status == "draw"
                 draw
             else 
                 puts "Invalid input"
